@@ -2,7 +2,9 @@ import React from 'react'
 
 const Main = () => {
     return (
-        <div>Main</div>
+        <div>Main
+            <h1>test commit</h1>
+        </div>
     )
 }
 
