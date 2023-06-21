@@ -1,9 +1,10 @@
 import React from 'react'
+import BottomBar from '../components/BottomBar'
 
 const Main = () => {
     return (
         <div>
-            <h1>test commit</h1>
+            <BottomBar />
         </div>
     )
 }
