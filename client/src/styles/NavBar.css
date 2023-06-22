@@ -1,0 +1,35 @@
+.nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    height: 80px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.hamburger-menu {
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.hamburger-menu:hover {
+    color: #ccc;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: default;
+    color: #fff;
+    margin: 25px auto 23px auto;
+    caret-color: transparent;
+}
