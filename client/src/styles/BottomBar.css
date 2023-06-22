@@ -29,7 +29,16 @@
 }
 .social-icon__link:hover {
     transform: translateY(-10px);
-    
+}
+.social-icon__link:hover::before {
+    content: 'GitHub Profile';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
+    font-size: 10px;
+    white-space: nowrap;
 }
 .menu__link {
     position: relative;

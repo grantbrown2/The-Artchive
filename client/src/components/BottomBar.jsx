@@ -1,5 +1,5 @@
 import React from 'react'
-import '../BottomBar.css';
+import '../styles/BottomBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 
@@ -17,13 +17,13 @@ const BottomBar = () => {
                 <div className="wave" id="wave4"></div>
             </div>
             <div className="menu">
-                <a className="menu__link" href="/">
+                <a className="menu__link" href="/home">
                     Home
                 </a>
                 <a className="menu__link" href="/">
                     About
                 </a>
-                <a className="menu__link" href="/">
+                <a className="menu__link" href="/logout">
                     Logout
                 </a>
             </div>
@@ -39,7 +39,7 @@ const BottomBar = () => {
                     </a>
                 </li>
                 <li className="menu__item">
-                    <a className="social-icon__link" href="#">
+                    <a className="social-icon__link" href="https://github.com/JoshuaEPearson">
                         <FontAwesomeIcon icon={faGithubSquare} />
                     </a>
                 </li>
