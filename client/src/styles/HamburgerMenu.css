@@ -14,6 +14,21 @@ html, body {
     animation: slideIn 0.5s ease forwards;
 }
 
+.hamburger-title {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.hamburger-line {
+    border-top: 1px solid grey
+}
+
+p {
+    color: white;
+}
+
 @keyframes slideIn {
     0% {
         left: -25%;

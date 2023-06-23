@@ -53,6 +53,7 @@
     opacity: 0.75;
     font-weight: 300;
     cursor: pointer;
+    caret-color: transparent;
 }
 .menu__link:hover {
     opacity: 1;
