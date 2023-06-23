@@ -30,6 +30,7 @@ const LoginReg = () => {
                 navigate("/home");
             })
             .catch(err => {
+                console.log(err);
                 const errorResponse = err.response.data.errors;
                 const errorArray = [];
                 for (const key of Object.keys(errorResponse)) {
@@ -50,7 +51,7 @@ const LoginReg = () => {
                 navigate("/home");
             })
             .catch(err => {
-                console.log(err)
+                console.log(err);
                 setLoginErrors(err.response.data);
             })
     }
