@@ -35,11 +35,12 @@ module.exports.createUser = (req, res) => { // add functionality to check for ex
             const userToken = jwt.sign({
                 id: user._id
             }, secret);
+            const { password, ...userInfo } = user._doc
             res
                 .cookie("usertoken", userToken, {
                     httpOnly: true
                 })
-                .json({ message: "Login success!", user: user });
+                .json({ message: "Login success!", user: userInfo });
         })
         .catch(err => res.status(400).json(err));
 }
