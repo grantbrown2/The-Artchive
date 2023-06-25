@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 import '../styles/LoginReg.css'
 
@@ -48,6 +49,11 @@ const LoginReg = () => {
         }, { withCredentials: true })
             .then(res => {
                 console.log(res);
+                const token = res.data.token;
+                // Store the token in cookies
+                Cookies.set('token', token, {expires: 1});
+                // Set the token as the default Authorization header for future requests
+                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                 navigate("/home");
             })
             .catch(err => {

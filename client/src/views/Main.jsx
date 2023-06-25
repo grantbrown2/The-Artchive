@@ -1,6 +1,7 @@
 import React from 'react'
 import BottomBar from '../components/BottomBar'
 import NavBar from '../components/NavBar'
+import WithAuth from '../components/WithAuth'
 
 const Main = () => {
     return (
@@ -11,4 +12,4 @@ const Main = () => {
     )
 }
 
-export default Main
+export default WithAuth(Main)
