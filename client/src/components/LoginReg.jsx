@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import '../styles/LoginReg.css'
+import logo from '../styles/logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 
 const LoginReg = () => {
 
@@ -14,6 +17,7 @@ const LoginReg = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const [loginErrors, setLoginErrors] = useState("");
+    const [formToggle, setFormToggle] = useState(true);
     const navigate = useNavigate();
 
     const registerHandler = (e) => {
@@ -62,52 +66,100 @@ const LoginReg = () => {
             })
     }
 
+    const handleFormToggle = () => {
+        setFormToggle(!formToggle);
+    }
+
+    const handleInputChange = (e) => {
+        const input = e.target;
+        if (input.value.trim() !== "") {
+            input.classList.add("has-content");
+        } else {
+            input.classList.remove("has-content");
+        }
+    }
+
     return (
         <div className='loginreg-container'>
-            <h2>Register</h2>
-            <form onSubmit={registerHandler} className='register'>
-                {errors.map((err, index) => (
-                    <p key={index} className="text-danger">{err}</p>
-                ))}
-                <div className="form-group">
-                    <label htmlFor="username">Username:</label>
-                    <input type="text" className="form-input" id="username" name="username" onChange={e => setUsername(e.target.value)} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="firstName">First Name:</label>
-                    <input type="text" className="form-input" id="firstName" name="firstName" onChange={e => setFirstName(e.target.value)} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="lastName">Last Name:</label>
-                    <input type="text" className="form-input" id="lastName" name="lastName" onChange={e => setLastName(e.target.value)} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="email">Email:</label>
-                    <input type="email" className="form-input" id="email" name="email" onChange={e => setEmail(e.target.value)} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" className="form-input" id="password" name="password" onChange={e => setPassword(e.target.value)} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="confirmPassword">Confirm Password:</label>
-                    <input type="password" className="form-input" id="confirmPassword" name="confirmPassword" onChange={e => setConfirmPassword(e.target.value)} />
-                </div>
-                <button type="submit" className="submit-button">Register</button>
-            </form>
-            <h2>Login</h2>
-            <form onSubmit={loginHandler}>
-                { loginErrors ? <p className="text-danger">{loginErrors}</p> : "" }
-                <div className="form-group">
-                    <label htmlFor="email">Email:</label>
-                    <input type="email" className="form-input" id="email" name="email" onChange={e => setEmail(e.target.value)} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" className="form-input" id="password" name="password" onChange={e => setPassword(e.target.value)} />
-                </div>
-                <button type="submit" className="submit-button">Login</button>
-            </form>
+            <div className='logo-container'>
+                <img className='logo' src={logo} alt='The Artchive Logo' />
+            </div>
+            <div className="slider-box">
+                <input id='slider' type='checkbox' checked={formToggle} onChange={handleFormToggle}/>
+                <label className='login-label' for='slider'>Login</label>
+                <label className='register-label' for='slider'>Register</label>
+                <span className="slider"></span>
+            </div>
+            <ul className="social-icon2">
+                <li className="social-icon__item2">
+                    <a className="social-icon__link2" href="https://github.com/grantbrown2">
+                        <FontAwesomeIcon icon={faGithubSquare} />
+                    </a>
+                </li>
+                <li className="social-icon__item2">
+                    <a className="social-icon__link2" href="https://github.com/shu-william">
+                        <FontAwesomeIcon icon={faGithubSquare} />
+                    </a>
+                </li>
+                <li className="social-icon__item2">
+                    <a className="social-icon__link2" href="https://github.com/JoshuaEPearson">
+                        <FontAwesomeIcon icon={faGithubSquare} />
+                    </a>
+                </li>
+            </ul>
+            {formToggle ? (
+                <>
+                    <div className="login-form">
+                        <form onSubmit={loginHandler}>
+                            { loginErrors ? <p className="text-danger">{loginErrors}</p> : "" }
+                            <div className="input-container">
+                                <input type="email" className="input-field" id="email" name="email" onChange={e => {setEmail(e.target.value); handleInputChange(e); }} />
+                                <label htmlFor="email" className='input-label'>Email:</label>
+                            </div>
+                            <div className="input-container">
+                                <input type="password" className="input-field" id="password" name="password" onChange={e => {setPassword(e.target.value); handleInputChange(e); }} />
+                                <label htmlFor="password" className='input-label'>Password:</label>
+                            </div>
+                            <button type="submit" className="submit-button">Login</button>
+                        </form>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div className="registration-form">
+                        <form onSubmit={registerHandler} className='register'>
+                            {errors.map((err, index) => (
+                                <p key={index} className="text-danger">{err}</p>
+                            ))}
+                            <div className="input-container">
+                                <input type="text" className="input-field" id="username" name="username" onChange={e => {setUsername(e.target.value);  handleInputChange(e); }} />
+                                <label htmlFor="username" className='input-label'>Username:</label>
+                            </div>
+                            <div className="input-container">
+                                <input type="text" className="input-field" id="firstName" name="firstName" onChange={e => {setFirstName(e.target.value);  handleInputChange(e); }} />
+                                <label htmlFor="firstName" className='input-label'>First Name:</label>
+                            </div>
+                            <div className="input-container">
+                                <input type="text" className="input-field" id="lastName" name="lastName" onChange={e => {setLastName(e.target.value);  handleInputChange(e); }} />
+                                <label htmlFor="lastName" className='input-label'>Last Name:</label>
+                            </div>
+                            <div className="input-container">
+                                <input type="email" className="input-field" id="email" name="email" onChange={e => {setEmail(e.target.value);  handleInputChange(e); }} />
+                                <label htmlFor="email" className='input-label'>Email:</label>
+                            </div>
+                            <div className="input-container">
+                                <input type="password" className="input-field" id="password" name="password" onChange={e => {setPassword(e.target.value);  handleInputChange(e); }} />
+                                <label htmlFor="password" className='input-label'>Password:</label>
+                            </div>
+                            <div className="input-container">
+                                <input type="password" className="input-field" id="confirmPassword" name="confirmPassword" onChange={e => {setConfirmPassword(e.target.value);  handleInputChange(e); }} />
+                                <label htmlFor="confirmPassword" className='input-label'>Confirm Password:</label>
+                            </div>
+                            <button type="submit" className="submit-button">Register</button>
+                        </form>
+                    </div>
+                </>
+            )}
         </div>
     )
 }

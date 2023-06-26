@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/BottomBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -37,9 +38,9 @@ const BottomBar = () => {
                 <a className="menu__link" href="/">
                     About
                 </a>
-                <button  className="menu__link" onClick={logoutUser}>
+                <Link  className="menu__link" onClick={logoutUser}>
                     Logout
-                </button>
+                </Link>
             </div>
             <ul className="social-icon">
                 <li className="social-icon__item">

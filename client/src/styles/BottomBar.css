@@ -20,6 +20,10 @@
 .menu__item {
     list-style: none;
 }
+.menu__item button {
+    background: transparent;
+    background-color: transparent;
+}
 .social-icon__link {
     font-size: 2rem;
     color: #fff;

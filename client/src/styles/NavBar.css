@@ -34,7 +34,7 @@ h1 {
     caret-color: transparent;
 }
 
-::selection {
+h1::selection {
     background-color: #333;
     color: fff;
 }
