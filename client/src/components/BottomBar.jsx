@@ -1,4 +1,7 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/BottomBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithubSquare } from '@fortawesome/free-brands-svg-icons';
@@ -7,6 +10,18 @@ import { faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 
 
 const BottomBar = () => {
+
+    const navigate = useNavigate();
+
+    function logoutUser(e) {
+        e.preventDefault();
+        axios.post("http://localhost:8000/api/users/logout", {}, { withCredentials: true })
+            .then(res => {
+                console.log(res);
+                navigate("/");
+            })
+            .catch(err => console.log(err))
+    }
 
     return (
         <footer className="footer">
@@ -23,9 +38,9 @@ const BottomBar = () => {
                 <a className="menu__link" href="/">
                     About
                 </a>
-                <a className="menu__link" href="/logout">
+                <Link  className="menu__link" onClick={logoutUser}>
                     Logout
-                </a>
+                </Link>
             </div>
             <ul className="social-icon">
                 <li className="social-icon__item">
