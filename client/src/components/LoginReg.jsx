@@ -86,8 +86,8 @@ const LoginReg = () => {
             </div>
             <div className="slider-box">
                 <input id='slider' type='checkbox' checked={formToggle} onChange={handleFormToggle}/>
-                <label className='login-label' for='slider'>Login</label>
-                <label className='register-label' for='slider'>Register</label>
+                <label className='login-label' htmlFor='slider'>Login</label>
+                <label className='register-label' htmlFor='slider'>Register</label>
                 <span className="slider"></span>
             </div>
             <ul className="social-icon2">

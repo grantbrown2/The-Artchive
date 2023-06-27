@@ -1,0 +1,90 @@
+.container {
+    position: absolute;
+    top: 40%;
+    left: 205%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 750px;
+    background-color: #fff;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    align-items: center;
+    text-align: center;
+    transition: 0.5s;
+    animation: slideIn2 0.5s ease forwards;
+}
+@keyframes slideIn2 {
+    0% {
+        left: -25%;
+    }
+    100% {
+        left: 50;
+    }
+}
+.image-upload {
+    margin: 0 auto 30px;
+    background-color: #3333338a;
+    width: 85%;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5);
+}
+.file-input {
+    color: transparent;
+    margin: 5px 0 0 167px;
+}
+.header-2 {
+    display: flex;
+    justify-content: center;
+}
+h5 {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.post-delete-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.post-delete-btn:hover {
+    color: red;
+}
+.post-delete-btn:hover::before {
+    content: 'Cancel Post';
+    position: absolute;
+    top: 1px;
+    right: -15px;
+    color: #333;
+    transform: translateX(-50%);
+    padding: 5px;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+
+
+
+
+
+
+
+
+
+
+.all-posts {
+    margin: 100px 50px;
+    height: 500px;
+    width: 500px;
+    background-color: #333;
+}
