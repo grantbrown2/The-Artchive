@@ -7,11 +7,12 @@ html, body {
     height: 100vh;
     background-color: #333;
     color: #333;
-    opacity: 0.75;
+    opacity: 1;
     margin: 0;
     position: fixed;
     left: -25%;
     animation: slideIn 0.5s ease forwards;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5);
 }
 
 .hamburger-title {
@@ -49,4 +50,9 @@ p {
     100% {
         left: -25%;
     }
+}
+
+.menu-links {
+    display: flex;
+    flex-direction: column;
 }
