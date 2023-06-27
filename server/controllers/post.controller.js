@@ -15,8 +15,13 @@ module.exports.findAllPosts = (req, res) => {
 
 module.exports.createPost = (req, res) => {
     Post.create({ user_id: req.userId, ...req.body })
-        .then(newPost => res.json(newPost))
-        .catch(err => res.json({ message: "Something went wrong creating a post.", error: err }))
+        .then(newPost => {
+            res.json(newPost)
+            User.findByIdAndUpdate(req.userId, { $push: { 'posts': newPost._id } }, { new: true })
+                .then(updatedUser => console.log(updatedUser))
+                .catch(err => console.log({ message: "Something went wrong adding post to user.", error: err }))
+        })
+        .catch(err => res.json({ message: "Something went wrong creating a post.", error: err }));
 }
 
 module.exports.updatePost = (req, res) => {
