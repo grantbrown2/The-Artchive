@@ -17,9 +17,9 @@ module.exports.createPost = (req, res) => {
     Post.create({ user_id: req.userId, ...req.body })
         .then(newPost => {
             res.json(newPost)
-            User.findByIdAndUpdate(req.userId, { $push: { 'posts': newPost._id } }, { new: true })
+            User.findByIdAndUpdate(req.userId, { $push: { 'posts': newPost._id.toString() }}, { new: true })
                 .then(updatedUser => console.log(updatedUser))
-                .catch(err => console.log({ message: "Something went wrong adding post to user.", error: err }))
+                .catch(err => console.log(err))
         })
         .catch(err => res.json({ message: "Something went wrong creating a post.", error: err }));
 }
@@ -32,6 +32,12 @@ module.exports.updatePost = (req, res) => {
 
 module.exports.deletePost = (req, res) => {
     Post.findByIdAndDelete(req.params.id)
-        .then(result => res.json(result))
+        .then(result => {
+            res.json(result)
+            console.log(`ObjectId(${req.params.id})`)
+            User.findByIdAndUpdate(req.userId, { $pull: { 'posts': req.params.id }})
+                .then(updatedUser => console.log(updatedUser))
+                .catch(err => console.log(err))
+        })
         .catch(err => res.json({ message: "Something went wrong deleting the post.", error: err }))
 }
