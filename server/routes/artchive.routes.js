@@ -1,4 +1,5 @@
 const UserController = require('../controllers/user.controller');
+const PostController = require('../controllers/post.controller');
 const { authenticate, getIdFromCookie } = require('../config/jwt.config');
 const { get } = require('mongoose');
 
@@ -18,4 +19,9 @@ module.exports = (app) => {
     app.get('/api/users/:username', authenticate, getIdFromCookie, UserController.findUserByName);
     app.patch('/api/users/update', authenticate, getIdFromCookie, UserController.updateUser);
     app.delete('/api/users/delete', authenticate, getIdFromCookie, UserController.deleteUser);
+    app.post('/api/posts', authenticate, getIdFromCookie, PostController.createPost);
+    app.get('/api/posts', authenticate, getIdFromCookie, PostController.findAllPosts);
+    app.get('/api/posts/:id', authenticate, getIdFromCookie, PostController.findPostById);
+    app.patch('/api/posts/:id', authenticate, getIdFromCookie, PostController.updatePost);
+    app.delete('/api/posts/:id', authenticate, getIdFromCookie, PostController.deletePost);
 }
