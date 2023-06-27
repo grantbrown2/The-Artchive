@@ -1,5 +1,6 @@
 const Post = require('../models/post.model');
 const User = require('../models/user.model');
+const mongoose = require('mongoose');
 
 module.exports.findPostById = (req, res) => {
     Post.findById(req.params.id)
@@ -17,7 +18,7 @@ module.exports.createPost = (req, res) => {
     Post.create({ user_id: req.userId, ...req.body })
         .then(newPost => {
             res.json(newPost)
-            User.findByIdAndUpdate(req.userId, { $push: { 'posts': newPost._id.toString() }}, { new: true })
+            User.findByIdAndUpdate(req.userId, { $push: { 'posts': newPost }}, { new: true })
                 .then(updatedUser => console.log(updatedUser))
                 .catch(err => console.log(err))
         })
@@ -31,11 +32,11 @@ module.exports.updatePost = (req, res) => {
 }
 
 module.exports.deletePost = (req, res) => {
+    let objectId = new mongoose.Types.ObjectId(req.params.id);
     Post.findByIdAndDelete(req.params.id)
         .then(result => {
             res.json(result)
-            console.log(`ObjectId(${req.params.id})`)
-            User.findByIdAndUpdate(req.userId, { $pull: { 'posts': req.params.id }})
+            User.findByIdAndUpdate(req.userId, { $pull: { 'posts': { '_id': objectId }}})
                 .then(updatedUser => console.log(updatedUser))
                 .catch(err => console.log(err))
         })
