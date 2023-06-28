@@ -1,24 +1,30 @@
 import React from 'react'
-import { useState } from 'react'
 import '../styles/HamburgerMenu.css'
 import NewPost from './NewPost'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faSquarePlus, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
-const HamburgerMenu = ({componentOpen}) => {
-    const [showNewPost, setShowNewPost] = useState(false);
-    const toggleNewPost = () => {
-        setShowNewPost(!showNewPost);
-    };
 
+const HamburgerMenu = ({componentOpen, toggleNewPost, showNewPost, toggleProfileComponent}) => {
     return (
         <div className={`hamburger ${componentOpen ? 'open' : 'close'}`}>
             <h2 className='hamburger-title'>The Artchive</h2>
             <div className="hamburger-line" />
             <div className='menu-links'>
-                <button>Profile</button>
-                <button onClick={toggleNewPost}>Create Post</button>
-                <button>Logout</button>
+                <div className="menu-flex">
+                    <FontAwesomeIcon className="menu-icons" icon={faUser} />
+                    <button className='ham-btn' onClick={toggleProfileComponent}>Profile</button>
+                </div>
+                <div className="menu-flex">
+                    <FontAwesomeIcon className="menu-icons" icon={faSquarePlus} />
+                    <button className='ham-btn' onClick={toggleNewPost}>Create Post</button>
+                </div>
+                <div className="menu-flex">
+                    <FontAwesomeIcon className="menu-icons" icon={faRightFromBracket} />
+                    <button className='ham-btn'>Logout</button>
+                </div>
             </div>
-            {showNewPost && <NewPost showNewPost={showNewPost} setShowNewPost={setShowNewPost}/>}
+            {showNewPost && <NewPost showNewPost={showNewPost} toggleNewPost={toggleNewPost}/>}
         </div>
     )
 }

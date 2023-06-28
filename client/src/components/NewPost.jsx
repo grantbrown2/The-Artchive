@@ -3,14 +3,11 @@ import { useState } from 'react';
 import axios from 'axios';
 import '../styles/Post.css'
 
-const NewPost = ({showNewPost, setShowNewPost}) => {
+const NewPost = ({showNewPost, toggleNewPost}) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [filepath, setFilepath] = useState(null);
 
-    const toggleNewPost = () => {
-        setShowNewPost(!showNewPost);
-    };
 
     const handleInputChange = (e) => {
         const input = e.target;
@@ -23,11 +20,11 @@ const NewPost = ({showNewPost, setShowNewPost}) => {
 
     const handleNewPost = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8000/api/posts/new", {
+        axios.post("http://localhost:8000/api/posts", {
             title,
             description,
             filepath
-        })
+        }, { withCredentials: true })
             .then(res => {
                 console.log(res.data);
                 toggleNewPost();
@@ -50,12 +47,12 @@ const NewPost = ({showNewPost, setShowNewPost}) => {
                         <input className="file-input" type="file" id='filepath' name='filepath' onChange={e => {setFilepath(e.target.value); handleInputChange(e); }}/>
                     </div>
                     <div className="input-container">
-                        <input type="text" className="input-field" id="title" name="title"/>
-                        <label htmlFor="title" className='input-label' onChange={e => {setTitle(e.target.value); handleInputChange(e); }}>Title:</label>
+                        <input type="text" className="input-field" id="title" name="title" onChange={e => {setTitle(e.target.value); handleInputChange(e); }}/>
+                        <label htmlFor="title" className='input-label'>Title:</label>
                     </div>
                     <div className="input-container">
-                        <input type="text" className="input-field" id="description" name="description"/>
-                        <label htmlFor="description" className='input-label' onChange={e => {setDescription(e.target.value); handleInputChange(e); }}>Description:</label>
+                        <input type="text" className="input-field" id="description" name="description" onChange={e => {setDescription(e.target.value); handleInputChange(e); }}/>
+                        <label htmlFor="description" className='input-label'>Description:</label>
                     </div>
                     <button type="submit" className="submit-button">Submit</button>
                 </form>

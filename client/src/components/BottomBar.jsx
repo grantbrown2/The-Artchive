@@ -9,7 +9,7 @@ import { faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 
 
 
-const BottomBar = () => {
+const BottomBar = ({setProfileToggle, setComponentOpen}) => {
 
     const navigate = useNavigate();
 
@@ -23,6 +23,11 @@ const BottomBar = () => {
             .catch(err => console.log(err))
     }
 
+    const returnHome = () => {
+        setProfileToggle(false);
+        setComponentOpen(false);
+    };
+
     return (
         <footer className="footer">
             <div className="waves">
@@ -32,9 +37,9 @@ const BottomBar = () => {
                 <div className="wave" id="wave4"></div>
             </div>
             <div className="menu">
-                <a className="menu__link" href="/home">
+                <Link className="menu__link" onClick={returnHome}>
                     Home
-                </a>
+                </Link>
                 <a className="menu__link" href="/">
                     About
                 </a>

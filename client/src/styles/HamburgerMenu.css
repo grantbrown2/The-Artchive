@@ -56,3 +56,43 @@ p {
     display: flex;
     flex-direction: column;
 }
+.menu-icons {
+    color: #fff;
+    height: 25px;
+    margin-right: 10px;
+}
+.menu-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    padding: 10px 20px;
+}
+.ham-btn {
+    position: relative;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 5px;
+    color: #fff;
+    transition: color 0.3s;
+    opacity: .7;
+}
+.ham-btn::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.3s;
+}
+.ham-btn:hover {
+    opacity: 1;
+}
+.ham-btn:hover::before {
+    width: 100%;
+}
