@@ -4,13 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import HamburgerMenu from './HamburgerMenu';
 
-const NavBar = () => {
-
-    const [componentOpen, setComponentOpen] = useState(false);
-    
-    const toggleMenu = () => {
-        setComponentOpen(!componentOpen);
-    };
+const NavBar = ({ componentOpen, toggleMenu, toggleNewPost, showNewPost, toggleProfileComponent}) => {
 
     return (
         <div className='nav-bar'>
@@ -20,7 +14,7 @@ const NavBar = () => {
                 </div>
                 <h1>The Artchive</h1>
             </div>
-            {componentOpen && <HamburgerMenu componentOpen={componentOpen}/>}
+            {componentOpen && <HamburgerMenu componentOpen={componentOpen} toggleNewPost={toggleNewPost} showNewPost={showNewPost} toggleProfileComponent={toggleProfileComponent}/>}
         </div>
     )
 }
