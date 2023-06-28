@@ -3,19 +3,20 @@ const User = require('../models/user.model');
 const mongoose = require('mongoose');
 
 module.exports.findPostById = (req, res) => {
-    Post.findById(req.params.id)
+    Post.findById(req.params.id).populate('author', 'username email firstName lastName')
         .then(onePost => res.json(onePost))
         .catch(err => res.json({ message: "Something went wrong retrieving that post.", error: err }));
 }
 
 module.exports.findAllPosts = (req, res) => {
-    Post.find()
+    Post.find().populate('author', 'username email firstName lastName')
         .then(allPosts => res.json({ posts: allPosts }))
         .catch(err => res.json({ message: "Something went wrong retrieving all posts.", error: err }))
 }
 
 module.exports.createPost = (req, res) => {
-    Post.create({ user_id: req.userId, ...req.body })
+    let objectId = new mongoose.Types.ObjectId(req.userId);
+    Post.create({ author: objectId, ...req.body })
         .then(newPost => {
             res.json(newPost)
             User.findByIdAndUpdate(req.userId, { $push: { 'posts': newPost }}, { new: true })
