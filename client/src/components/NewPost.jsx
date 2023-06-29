@@ -26,10 +26,9 @@ const NewPost = ({showNewPost, toggleNewPost, postList, setPostList, fullPostLis
             filepath
         }, { withCredentials: true })
             .then(res => {
-                console.log(res.data)
+                console.log(res);
                 setPostList([...postList, res.data]);
                 setFullPostList([...fullPostList, res.data]);
-                console.log(postList, fullPostList)
                 toggleNewPost();
             })
             .catch(err => {

@@ -26,6 +26,7 @@ const AllPosts = ({showNewPost, profileToggle, toggleProfileComponent, postList,
                 <div className='post-content' key={post._id}>
                     <div className="sub-header23">
                         <span className='author-header'></span>
+                        <span className='author-header'>{post.author.username}</span>
                         <span>post date</span>
                         <FontAwesomeIcon icon={faGear} className='settings'/>
                     </div>
