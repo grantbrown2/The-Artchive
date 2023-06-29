@@ -21,11 +21,10 @@ const AllPosts = ({showNewPost, profileToggle, toggleProfileComponent, postList,
     return (
         <div className='all-posts'>
             {showNewPost ? <div className="blur"></div> : null }
-            <Profile profileToggle={profileToggle} postList={postList} setPostList={setPostList}/>
+            <Profile profileToggle={profileToggle} postList={postList} setPostList={setPostList} fullPostList={fullPostList} setFullPostList={setFullPostList}/>
             {!profileToggle && fullPostList.map((post) => (
                 <div className='post-content' key={post._id}>
                     <div className="sub-header23">
-                        <span className='author-header'></span>
                         <span className='author-header'>{post.author.username}</span>
                         <span>post date</span>
                         <FontAwesomeIcon icon={faGear} className='settings'/>
