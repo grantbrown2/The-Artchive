@@ -23,9 +23,9 @@ const AllPosts = ({showNewPost, profileToggle, toggleProfileComponent, postList,
             {showNewPost ? <div className="blur"></div> : null }
             <Profile profileToggle={profileToggle} postList={postList} setPostList={setPostList}/>
             {!profileToggle && fullPostList.map((post) => (
-                <div className='post-content'>
+                <div className='post-content' key={post._id}>
                     <div className="sub-header23">
-                        {/* <span className='author-header'>{post.author.username}</span> */}
+                        <span className='author-header'></span>
                         <span>post date</span>
                         <FontAwesomeIcon icon={faGear} className='settings'/>
                     </div>
@@ -34,8 +34,8 @@ const AllPosts = ({showNewPost, profileToggle, toggleProfileComponent, postList,
                         <button className='likes'><FontAwesomeIcon icon={faHeart} /></button>
                         <button className='likes'><FontAwesomeIcon icon={faComment} /></button>
                     </div>
-                    {/* <h3 className='post-title'>{post.title}</h3> */}
-                    {/* <p className='post-description'>{post.description}</p> */}
+                    <h3 className='post-title'>{post.title}</h3>
+                    <p className='post-description'>{post.description}</p>
                 </div>
             ))}
             <div className="end-page"><p className='end-text'>End of Content!</p></div>

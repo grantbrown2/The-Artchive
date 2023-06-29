@@ -9,6 +9,10 @@ import { faGear } from '@fortawesome/free-solid-svg-icons';
 const Profile = ({profileToggle, postList, setPostList}) => {
 
     useEffect(() => {
+        axios.get('http://localhost:8000/api/users/update', {withCredentials: true})
+    })
+
+    useEffect(() => {
         axios.get('http://localhost:8000/api/users/self', {withCredentials: true})
             .then(res => {
                 setPostList(res.data.user.posts);
@@ -26,7 +30,7 @@ const Profile = ({profileToggle, postList, setPostList}) => {
                     </div>
                     <div className="header10">
                         <div className="sub-header">
-                            <span className="username">Username</span>
+                            <span className="username">TEST</span>
                             <button onClick={() => console.log("TEST BUTTON")}>Edit Profile</button>
                             <FontAwesomeIcon icon={faGear} className='settings'/>
                         </div>
