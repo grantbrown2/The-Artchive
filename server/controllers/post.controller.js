@@ -18,7 +18,9 @@ module.exports.createPost = (req, res) => {
     let objectId = new mongoose.Types.ObjectId(req.userId);
     Post.create({ author: objectId, ...req.body })
         .then(newPost => {
-            res.json(newPost)
+            Post.findById(newPost._id).populate('author', 'username email firstName lastName')
+                .then(foundPost => res.json(foundPost))
+                .catch(err => console.log(err))
             User.findByIdAndUpdate(req.userId, { $push: { 'posts': newPost }}, { new: true })
                 .then(updatedUser => console.log(updatedUser))
                 .catch(err => console.log(err))
