@@ -47,7 +47,7 @@ const Profile = ({profileToggle, postList, setPostList}) => {
                         return (
                             <div className="post-container" >
                                 {/* <img src={post.image} className='post-image' /> */}
-                                <img src={temp} className='post-image-profile' alt='Post' onClick={() => console.log("TEST", post._id)}/>
+                                <img src={temp} className='post-image-profile' alt='Post' onClick={() => console.log("TEST")}/>
                             </div>
                         )
                     })}

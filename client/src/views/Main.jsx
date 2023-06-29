@@ -39,6 +39,8 @@ const Main = () => {
                 toggleProfileComponent={toggleProfileComponent}
                 postList={postList}
                 setPostList={setPostList}
+                fullPostList={fullPostList}
+                setFullPostList={setFullPostList}
             />
             <BottomBar
                 setProfileToggle={setProfileToggle}

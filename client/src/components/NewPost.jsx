@@ -27,7 +27,7 @@ const NewPost = ({showNewPost, toggleNewPost, postList, setPostList, fullPostLis
         }, { withCredentials: true })
             .then(res => {
                 setPostList([...postList, res.data.post]);
-                // setFullPostList([...fullPostList, res.data.post]);
+                setFullPostList([...fullPostList, res.data.post]);
                 toggleNewPost();
             })
             .catch(err => {
