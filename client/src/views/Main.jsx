@@ -10,6 +10,8 @@ const Main = () => {
     const [componentOpen, setComponentOpen] = useState(false);
     const [showNewPost, setShowNewPost] = useState(false);
     const [profileToggle, setProfileToggle] = useState(false);
+    const [postList, setPostList] = useState([]);
+    const [fullPostList, setFullPostList] = useState([]);
 
     const toggleMenu = () => {
         setComponentOpen(!componentOpen);
@@ -29,9 +31,28 @@ const Main = () => {
 
     return (
         <div className='main'>
-            <NavBar componentOpen={componentOpen} toggleMenu={toggleMenu} toggleNewPost={toggleNewPost} showNewPost={showNewPost} toggleProfileComponent={toggleProfileComponent}/>
-            <BottomBar setProfileToggle={setProfileToggle} setComponentOpen={setComponentOpen}/>
-            <AllPosts showNewPost={showNewPost} profileToggle={profileToggle}/>
+            <NavBar
+                componentOpen={componentOpen}
+                toggleMenu={toggleMenu}
+                toggleNewPost={toggleNewPost}
+                showNewPost={showNewPost}
+                toggleProfileComponent={toggleProfileComponent}
+                postList={postList}
+                setPostList={setPostList}
+            />
+            <BottomBar
+                setProfileToggle={setProfileToggle}
+                setComponentOpen={setComponentOpen}
+                setShowNewPost={setShowNewPost}
+            />
+            <AllPosts
+                showNewPost={showNewPost}
+                profileToggle={profileToggle}
+                postList={postList}
+                setPostList={setPostList}
+                fullPostList={fullPostList}
+                setFullPostList={setFullPostList}
+            />
         </div>
     )
 }

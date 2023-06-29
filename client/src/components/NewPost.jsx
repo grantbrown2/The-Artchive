@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import '../styles/Post.css'
 
-const NewPost = ({showNewPost, toggleNewPost}) => {
+const NewPost = ({showNewPost, toggleNewPost, postList, setPostList, fullPostList, setFullPostList}) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [filepath, setFilepath] = useState(null);
@@ -26,7 +26,8 @@ const NewPost = ({showNewPost, toggleNewPost}) => {
             filepath
         }, { withCredentials: true })
             .then(res => {
-                console.log(res.data);
+                setPostList([...postList, res.data.post]);
+                // setFullPostList([...fullPostList, res.data.post]);
                 toggleNewPost();
             })
             .catch(err => {
