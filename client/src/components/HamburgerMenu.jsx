@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faSquarePlus, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 
-const HamburgerMenu = ({componentOpen, toggleNewPost, showNewPost, toggleProfileComponent}) => {
+const HamburgerMenu = ({componentOpen, toggleNewPost, showNewPost, toggleProfileComponent, postList, setPostList, fullPostList, setFullPostList}) => {
     return (
         <div className={`hamburger ${componentOpen ? 'open' : 'close'}`}>
             <h2 className='hamburger-title'>The Artchive</h2>
@@ -24,7 +24,13 @@ const HamburgerMenu = ({componentOpen, toggleNewPost, showNewPost, toggleProfile
                     <button className='ham-btn'>Logout</button>
                 </div>
             </div>
-            {showNewPost && <NewPost showNewPost={showNewPost} toggleNewPost={toggleNewPost}/>}
+            {showNewPost && <NewPost
+            showNewPost={showNewPost}
+            toggleNewPost={toggleNewPost}
+            postList={postList}
+            setPostList={setPostList}
+            fullPostList={fullPostList}
+            setFullPostList={setFullPostList}/>}
         </div>
     )
 }

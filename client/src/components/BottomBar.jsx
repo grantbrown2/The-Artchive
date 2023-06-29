@@ -9,7 +9,7 @@ import { faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 
 
 
-const BottomBar = ({setProfileToggle, setComponentOpen}) => {
+const BottomBar = ({setProfileToggle, setComponentOpen, setShowNewPost}) => {
 
     const navigate = useNavigate();
 
@@ -26,6 +26,7 @@ const BottomBar = ({setProfileToggle, setComponentOpen}) => {
     const returnHome = () => {
         setProfileToggle(false);
         setComponentOpen(false);
+        setShowNewPost(false);
     };
 
     return (

@@ -31,7 +31,6 @@ const LoginReg = () => {
             confirmPassword 
         }, { withCredentials: true })
             .then(res => {
-                console.log(res);
                 navigate("/home");
             })
             .catch(err => {
@@ -52,7 +51,6 @@ const LoginReg = () => {
             password
         }, { withCredentials: true })
             .then(res => {
-                console.log(res);
                 const token = res.data.token;
                 // Store the token in cookies
                 Cookies.set('token', token, {expires: 1});
