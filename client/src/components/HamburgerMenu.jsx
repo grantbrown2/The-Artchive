@@ -1,4 +1,6 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/HamburgerMenu.css'
 import NewPost from './NewPost'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,6 +8,18 @@ import { faUser, faSquarePlus, faRightFromBracket } from '@fortawesome/free-soli
 
 
 const HamburgerMenu = ({componentOpen, toggleNewPost, showNewPost, toggleProfileComponent, postList, setPostList, fullPostList, setFullPostList}) => {
+
+    const navigate = useNavigate();
+    function logoutUser(e) {
+        e.preventDefault();
+        axios.post("http://localhost:8000/api/users/logout", {}, { withCredentials: true })
+            .then(res => {
+                console.log(res);
+                navigate("/");
+            })
+            .catch(err => console.log(err))
+    }
+
     return (
         <div className={`hamburger ${componentOpen ? 'open' : 'close'}`}>
             <h2 className='hamburger-title'>The Artchive</h2>
@@ -21,7 +35,7 @@ const HamburgerMenu = ({componentOpen, toggleNewPost, showNewPost, toggleProfile
                 </div>
                 <div className="menu-flex">
                     <FontAwesomeIcon className="menu-icons" icon={faRightFromBracket} />
-                    <button className='ham-btn'>Logout</button>
+                    <button className='ham-btn' onClick={logoutUser}>Logout</button>
                 </div>
             </div>
             {showNewPost && <NewPost

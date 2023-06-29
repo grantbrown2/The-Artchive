@@ -1,4 +1,5 @@
 import '../styles/NavBar.css';
+import logo from '../styles/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import HamburgerMenu from './HamburgerMenu';
@@ -11,7 +12,7 @@ const NavBar = ({ componentOpen, toggleMenu, toggleNewPost, showNewPost, toggleP
                 <div className="hamburger-menu">
                     <FontAwesomeIcon icon={faBars} className='hamburger-menu-icon' onClick={toggleMenu}/>
                 </div>
-                <h1>The Artchive</h1>
+                <img className='main-logo' src={logo} alt='The Artchive Logo' />
             </div>
             {componentOpen && <HamburgerMenu
             componentOpen={componentOpen}
