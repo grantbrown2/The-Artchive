@@ -59,11 +59,6 @@ const BottomBar = ({setProfileToggle, setComponentOpen, setShowNewPost}) => {
                         <FontAwesomeIcon icon={faGithubSquare} />
                     </a>
                 </li>
-                <li className="menu__item">
-                    <a className="social-icon__link" href="https://github.com/JoshuaEPearson">
-                        <FontAwesomeIcon icon={faGithubSquare} />
-                    </a>
-                </li>
             </ul>
         </footer>
     )

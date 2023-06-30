@@ -99,11 +99,6 @@ const LoginReg = () => {
                         <FontAwesomeIcon icon={faGithubSquare} />
                     </a>
                 </li>
-                <li className="social-icon__item2">
-                    <a className="social-icon__link2" href="https://github.com/JoshuaEPearson">
-                        <FontAwesomeIcon icon={faGithubSquare} />
-                    </a>
-                </li>
             </ul>
             {formToggle ? (
                 <>
