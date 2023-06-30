@@ -3,10 +3,8 @@
 
 ## To run this application:
 ```
-  Change directories into client and server folders and run 'npm install'
   In server folder, add .env file with your own JWT_KEY (for example, JWT_KEY=12345678)
-  In client folder, run 'npm run start'
-  In server folder, run 'nodemon server.js'
+  In both client and server folders, run 'npm install' and then 'npm start'
 ```
 
 ## Product Backlog:
