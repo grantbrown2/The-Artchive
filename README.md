@@ -3,6 +3,7 @@
 
 ## To run this application:
 ```
+  Note: This application uses MongoDB Community Server version 5
   In server folder, add .env file with your own JWT_KEY (for example, JWT_KEY=12345678)
   In both client and server folders, run 'npm install' and then 'npm start'
 ```
