@@ -20,16 +20,18 @@ const NewPost = ({showNewPost, toggleNewPost, postList, setPostList, fullPostLis
 
     const handleNewPost = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8000/api/posts", {
-            title,
-            description,
-            filepath
-        }, { 
-            withCredentials: true,
-            headers: {
-                "Content-Type": "multipart/form-data"
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("filepath", filepath);
+
+        axios.post("http://localhost:8000/api/posts",
+            formData, 
+            {
+                withCredentials: true,
+                headers: { "Content-Type": "multipart/form-data" }
             }
-        })
+        )
             .then(res => {
                 console.log(res);
                 setPostList([...postList, res.data]);
@@ -51,7 +53,7 @@ const NewPost = ({showNewPost, toggleNewPost, postList, setPostList, fullPostLis
                 <form encType="multipart/form-data" onSubmit={handleNewPost}>
                     <div className="image-upload">
                         <label htmlFor="file-input">Choose an image</label>
-                        <input className="file-input" type="file" id='filepath' name='filepath' onChange={e => {setFilepath(e.target.value); handleInputChange(e); }}/>
+                        <input className="file-input" type="file" id='filepath' name='filepath' onChange={e => {setFilepath(e.target.files[0]); handleInputChange(e); }}/>
                     </div>
                     <div className="input-container">
                         <input type="text" className="input-field" id="title" name="title" onChange={e => {setTitle(e.target.value); handleInputChange(e); }}/>
