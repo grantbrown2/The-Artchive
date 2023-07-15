@@ -24,7 +24,12 @@ const NewPost = ({showNewPost, toggleNewPost, postList, setPostList, fullPostLis
             title,
             description,
             filepath
-        }, { withCredentials: true })
+        }, { 
+            withCredentials: true,
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
             .then(res => {
                 console.log(res);
                 setPostList([...postList, res.data]);
@@ -43,7 +48,7 @@ const NewPost = ({showNewPost, toggleNewPost, postList, setPostList, fullPostLis
                 <h5 className='title'>Create a New Post</h5>
                 <button className='post-delete-btn' onClick={toggleNewPost}>X</button>
             </div>
-                <form onSubmit={handleNewPost}>
+                <form encType="multipart/form-data" onSubmit={handleNewPost}>
                     <div className="image-upload">
                         <label htmlFor="file-input">Choose an image</label>
                         <input className="file-input" type="file" id='filepath' name='filepath' onChange={e => {setFilepath(e.target.value); handleInputChange(e); }}/>

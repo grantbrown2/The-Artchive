@@ -2,6 +2,8 @@ const UserController = require('../controllers/user.controller');
 const PostController = require('../controllers/post.controller');
 const { authenticate, getIdFromCookie } = require('../config/jwt.config');
 const { get } = require('mongoose');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 module.exports = (app) => {
     app.use(function(req, res, next) {
@@ -19,7 +21,7 @@ module.exports = (app) => {
     app.get('/api/users/:username', authenticate, getIdFromCookie, UserController.findUserByName);
     app.patch('/api/users/update', authenticate, getIdFromCookie, UserController.updateUser);
     app.delete('/api/users/delete', authenticate, getIdFromCookie, UserController.deleteUser);
-    app.post('/api/posts', authenticate, getIdFromCookie, PostController.createPost);
+    app.post('/api/posts', authenticate, getIdFromCookie, upload.single('filepath'), PostController.createPost);
     app.get('/api/posts', authenticate, getIdFromCookie, PostController.findAllPosts);
     app.get('/api/posts/:id', authenticate, getIdFromCookie, PostController.findPostById);
     app.patch('/api/posts/:id', authenticate, getIdFromCookie, PostController.updatePost);
