@@ -1,5 +1,17 @@
 const multer = require('multer');
 const { handleUpload } = require('./cloudinary');
+const path = require("path");
+
+const checkFileType = function (file, cb) {
+    const fileTypes = /jpeg|jpg|png|gif|svg/;
+    const extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
+    const mimeType = fileTypes.test(file.mimetype);
+    if (mimeType && extName) {
+        return cb(null, true);
+    } else {
+        cb("Error: Please upload an image file.");
+    }
+};
 
 const storage = multer.diskStorage({
     destination: 'uploads/',
@@ -7,7 +19,12 @@ const storage = multer.diskStorage({
         cb(null, `${Date.now()}--${file.originalname}`);
     },
 })
-const upload = multer({ storage: storage });
+const upload = multer({ 
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+        checkFileType(file, cb);
+    } 
+});
 
 function runMiddleware(req, res, fn) {
     return new Promise((resolve, reject) => {
