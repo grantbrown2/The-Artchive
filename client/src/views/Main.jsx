@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BottomBar from '../components/BottomBar'
 import NavBar from '../components/NavBar'
 import WithAuth from '../components/WithAuth'
 import AllPosts from '../components/AllPosts'
 import './Main.css'
+import axios from 'axios'
 
 
 const Main = () => {
@@ -12,6 +13,14 @@ const Main = () => {
     const [profileToggle, setProfileToggle] = useState(false);
     const [postList, setPostList] = useState([]);
     const [fullPostList, setFullPostList] = useState([]);
+    const [loggedInUsername, setLoggedInUsername] = useState('');
+
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/users/self', {withCredentials:true})
+        .then((response) =>{
+            setLoggedInUsername(response.data.user.username)
+        })
+        }, [])
 
     const toggleMenu = () => {
         setComponentOpen(!componentOpen);

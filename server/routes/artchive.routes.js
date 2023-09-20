@@ -20,6 +20,7 @@ module.exports = (app) => {
     app.get('/api/users/:username', authenticate, getIdFromCookie, UserController.findUserByName);
     app.patch('/api/users/update', authenticate, getIdFromCookie, UserController.updateUser);
     app.delete('/api/users/delete', authenticate, getIdFromCookie, UserController.deleteUser);
+    
     app.post('/api/posts', authenticate, getIdFromCookie, uploadHandler, PostController.createPost);
     app.get('/api/posts', authenticate, getIdFromCookie, PostController.findAllPosts);
     app.get('/api/posts/:id', authenticate, getIdFromCookie, PostController.findPostById);

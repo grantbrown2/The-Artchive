@@ -11,7 +11,8 @@ const AllPosts = ({showNewPost, profileToggle, toggleProfileComponent, postList,
     useEffect(() => {
         axios.get('http://localhost:8000/api/posts', { withCredentials: true })
             .then(response => {
-                setFullPostList(response.data.posts);
+                const reverseList = response.data.posts.reverse();
+                setFullPostList(reverseList);
             })
             .catch(error => {
                 console.log(error);
