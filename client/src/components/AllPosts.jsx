@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import '../styles/Post.css'
-import temp from '../styles/TEMP.png'
 import Profile from './Profile'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 
-const AllPosts = ({showNewPost, profileToggle, toggleProfileComponent, postList, setPostList, fullPostList, setFullPostList }) => {
+const AllPosts = ({showNewPost, profileToggle, postList, setPostList, fullPostList, setFullPostList, loggedInUsername}) => {
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/posts', { withCredentials: true })
@@ -17,7 +16,7 @@ const AllPosts = ({showNewPost, profileToggle, toggleProfileComponent, postList,
             .catch(error => {
                 console.log(error);
             });
-    }, []);
+    }, [setFullPostList]);
 
     return (
         <div className='all-posts'>
@@ -28,9 +27,14 @@ const AllPosts = ({showNewPost, profileToggle, toggleProfileComponent, postList,
                     <div className="sub-header23">
                         <span className='author-header'>{post.author.username}</span>
                         <span>post date</span>
-                        <FontAwesomeIcon icon={faGear} className='settings'/>
+                        {loggedInUsername === post.author.username ? (
+                            <FontAwesomeIcon icon={faGear} className='settings'/>
+                        ) : null }
                     </div>
-                    <img src={temp} className='post-image' alt='Post'/>
+                    {post.postImages.map((image, index) => {
+                                const imageURL = `http://localhost:8000/${image.replace(/\\/g, '/')}`;
+                                return <img className='post-image' key={index} src={imageURL} alt={`Post Image ${index + 1}`}/>;
+                            })}
                     <div className="like-box">
                         <button className='likes'><FontAwesomeIcon icon={faHeart} /></button>
                         <button className='likes'><FontAwesomeIcon icon={faComment} /></button>

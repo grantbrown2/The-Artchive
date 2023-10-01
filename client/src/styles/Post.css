@@ -118,6 +118,7 @@ h5 {
 }
 .post-image {
     height: 400px;
+    width: 500px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     caret-color: transparent;

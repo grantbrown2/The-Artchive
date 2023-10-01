@@ -6,7 +6,7 @@ import '../styles/Post.css'
 const NewPost = ({showNewPost, toggleNewPost, postList, setPostList, fullPostList, setFullPostList}) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [filepath, setFilepath] = useState(null);
+    const [postImages, setPostImages] = useState([]);
 
 
     const handleInputChange = (e) => {
@@ -23,7 +23,7 @@ const NewPost = ({showNewPost, toggleNewPost, postList, setPostList, fullPostLis
         const formData = new FormData();
         formData.append("title", title);
         formData.append("description", description);
-        formData.append("filepath", filepath);
+        formData.append("postImages", postImages);
 
         axios.post("http://localhost:8000/api/posts",
             formData, 
@@ -53,7 +53,7 @@ const NewPost = ({showNewPost, toggleNewPost, postList, setPostList, fullPostLis
                 <form encType="multipart/form-data" onSubmit={handleNewPost}>
                     <div className="image-upload">
                         <label htmlFor="file-input">Choose an image</label>
-                        <input className="file-input" type="file" id='filepath' name='filepath' accept='image/*' onChange={e => {setFilepath(e.target.files[0]); handleInputChange(e); }}/>
+                        <input type="file" id="postImages" name="postImages" accept="image/*" onChange={e => { setPostImages(e.target.files[0]); handleInputChange(e); }} />
                     </div>
                     <div className="input-container">
                         <input type="text" className="input-field" id="title" name="title" onChange={e => {setTitle(e.target.value); handleInputChange(e); }}/>

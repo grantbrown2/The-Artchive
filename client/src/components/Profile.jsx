@@ -2,29 +2,35 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import ProfileIcon from '../styles/ProfileIcon.png';
 import '../styles/Profile.css';
-import temp from '../styles/TEMP.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 
-const Profile = ({profileToggle, postList, setPostList, fullPostList, setFullPostList }) => {
+const Profile = ({ profileToggle, postList, setPostList, fullPostList, setFullPostList }) => {
     const [username, setUsername] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/users/update', {withCredentials: true})
-    })
+        // Make an Axios request to get all posts
+        axios.get('http://localhost:8000/api/posts', { withCredentials: true })
+            .then((res) => {
+                const allPosts = res.data.posts;
+                // Make another Axios request to get the current user's ID
+                axios.get('http://localhost:8000/api/users/self', { withCredentials: true })
+                    .then((userRes) => {
+                        const currentUserId = userRes.data.user._id;
+                        // Filter posts to include only those with the same author ID as the current user's ID
+                        const userPosts = allPosts.filter((post) => post.author._id === currentUserId);
+                        setPostList(userPosts);
 
-    useEffect(() => {
-        axios.get('http://localhost:8000/api/users/self', {withCredentials: true})
-            .then(res => {
-                setPostList(res.data.user.posts);
-                setUsername(res.data.user.username);
-                setFirstName(res.data.user.firstName);
-                setLastName(res.data.user.lastName);
+                        setUsername(userRes.data.user.username);
+                        setFirstName(userRes.data.user.firstName);
+                        setLastName(userRes.data.user.lastName);
+                    })
+                    .catch((err) => console.log(err));
             })
-            .catch(err => console.log(err))
-    }, [setPostList])
+            .catch((err) => console.log(err));
+    }, [setPostList]);
 
     const deletePost = (postId) => {
         axios.delete(`http://localhost:8000/api/posts/${postId}`, { withCredentials: true })
@@ -42,13 +48,13 @@ const Profile = ({profileToggle, postList, setPostList, fullPostList, setFullPos
             <div className='profile-page'>
                 <div className="header9">
                     <div className="profile-container">
-                        <img src={ProfileIcon} className='profile-icon' alt='Profile Icon'/>
+                        <img src={ProfileIcon} className='profile-icon' alt='Profile Icon' />
                     </div>
                     <div className="header10">
                         <div className="sub-header">
                             <span className="username">{username}</span>
                             <button >Edit Profile</button>
-                            <FontAwesomeIcon icon={faGear} className='settings'/>
+                            <FontAwesomeIcon icon={faGear} className='settings' />
                         </div>
                         <div className="sub-header2">
                             <span className='stats'>0 Posts</span>
@@ -66,16 +72,14 @@ const Profile = ({profileToggle, postList, setPostList, fullPostList, setFullPos
                     {postList.map((post) => {
                         return (
                             <div className="post-container" key={post._id}>
-                                {/* <img src={post.image} className='post-image' /> */}
                                 <button onClick={() => deletePost(post._id)}>X</button>
-                                <img src={temp} className='post-image-profile' alt='Post' onClick={() => console.log("TEST")}/>
+                                <img src={`http://localhost:8000/${post.postImages[0]}`} className='post-image-profile' alt='post' />
                             </div>
-                        )
+                        );
                     })}
                 </div>
             </div>
         ) : null
     );
 }
-
 export default Profile

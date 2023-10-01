@@ -63,6 +63,7 @@ const Main = () => {
                 setPostList={setPostList}
                 fullPostList={fullPostList}
                 setFullPostList={setFullPostList}
+                loggedInUsername={loggedInUsername}
             />
         </div>
     )

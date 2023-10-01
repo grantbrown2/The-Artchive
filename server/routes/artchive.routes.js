@@ -1,8 +1,16 @@
 const UserController = require('../controllers/user.controller');
 const PostController = require('../controllers/post.controller');
 const { authenticate, getIdFromCookie } = require('../config/jwt.config');
+const express = require('express');
 const { get } = require('mongoose');
-const { uploadHandler } = require('../helpers/multer');
+const path = require('path'); // Import the 'path' module
+
+const multer = require('multer');
+
+const upload = multer({ dest: 'uploads/' });
+
+
+
 
 module.exports = (app) => {
     app.use(function(req, res, next) {
@@ -12,6 +20,8 @@ module.exports = (app) => {
         );
         next();
     })
+    app.use('/uploads', express.static('uploads'));
+
     app.post('/api/users/register', UserController.createUser);
     app.post('/api/users/login', UserController.loginUser);
     app.post('/api/users/logout', UserController.logout);
@@ -21,7 +31,7 @@ module.exports = (app) => {
     app.patch('/api/users/update', authenticate, getIdFromCookie, UserController.updateUser);
     app.delete('/api/users/delete', authenticate, getIdFromCookie, UserController.deleteUser);
     
-    app.post('/api/posts', authenticate, getIdFromCookie, uploadHandler, PostController.createPost);
+    app.post('/api/posts', authenticate, getIdFromCookie, upload.array('postImages'), PostController.createPost);
     app.get('/api/posts', authenticate, getIdFromCookie, PostController.findAllPosts);
     app.get('/api/posts/:id', authenticate, getIdFromCookie, PostController.findPostById);
     app.patch('/api/posts/:id', authenticate, getIdFromCookie, PostController.updatePost);

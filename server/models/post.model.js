@@ -8,7 +8,9 @@ const PostSchema = new mongoose.Schema({
     },
     title: { type: String },
     description: { type: String },
-    filepath: { type: String },
+    postImages: {
+        type: [String]
+    },
     likes: [],
     comments: []
 }, { timestamps: true });
