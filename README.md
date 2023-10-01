@@ -10,7 +10,7 @@
 
 ## Product Backlog:
 ```
-  Implement file upload system
+  Implement file upload system - COMPLETED 10/1/23
   Implement likes and comments functionality in the backend
   Check if a username/email already exists in the database
   Fix bug where application redirects to login page upon refresh
