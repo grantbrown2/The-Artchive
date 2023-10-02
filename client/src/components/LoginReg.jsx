@@ -34,13 +34,17 @@ const LoginReg = () => {
                 navigate("/home");
             })
             .catch(err => {
-                console.log(err);
-                const errorResponse = err.response.data.errors;
-                const errorArray = [];
-                for (const key of Object.keys(errorResponse)) {
-                    errorArray.push(errorResponse[key].message)
+                if(err.response.data.code === 11000) {
+                    let keyName = Object.keys(err.response.data.keyValue)[0];
+                    setErrors([`The ${keyName} provided already exists.`]);
+                } else {
+                    const errorResponse = err.response.data.errors;
+                    const errorArray = [];
+                    for (const key of Object.keys(errorResponse)) {
+                        errorArray.push(errorResponse[key].message);
+                    }
+                    setErrors(errorArray);
                 }
-                setErrors(errorArray);
             })
     }
 
