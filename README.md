@@ -12,7 +12,7 @@
 ```
   Implement file upload system - COMPLETED 10/1/23
   Implement likes and comments functionality in the backend
-  Check if a username/email already exists in the database
+  Check if a username/email already exists in the database - COMPLETED 10/1/23
   Fix bug where application redirects to login page upon refresh
   Allow users to add a profile picture and edit their profile
   Allow users to edit their posts
