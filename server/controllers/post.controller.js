@@ -20,17 +20,19 @@ module.exports.findAllPosts = (req, res) => {
 }
 
 module.exports.createPost = async (req, res) => {
-    // Extract user ID from the token
-    const token = req.cookies.usertoken;
-    const decodedToken = jwt.verify(token, secret);
-    const userId = decodedToken.id;
-    const user = await User.findById(userId);
-    if (!user) {
-        return res.status(404).json({ message: "User not found" });
-    }
-    // Check if there are uploaded files
-    if (req.files && req.files.length > 0) {
-        try {
+    try {
+        // Extract user ID from the token
+        const token = req.cookies.usertoken;
+        const decodedToken = jwt.verify(token, secret);
+        const userId = decodedToken.id;
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Check if there are uploaded files
+        if (req.files && req.files.length > 0) {
             // Get the file paths and original names
             const filePaths = req.files.map(file => file.path);
             const originalNames = req.files.map(file => file.originalname);
@@ -43,29 +45,26 @@ module.exports.createPost = async (req, res) => {
 
             // Update the postImages field with the renamed file paths
             req.body.postImages = renamedFilePaths;
-        } catch (err) {
-            console.error('Error renaming files:', err);
-            return res.status(500).json({ message: 'Error renaming files', error: err });
         }
-    }
 
-    Post.create({ author: user, title: req.body.title, description: req.body.description, postImages: req.body.postImages })
-    .then(newPost => {
-        // Update the user's 'posts' field with the new post's ID
-        User.findByIdAndUpdate(userId, { $push: { posts: newPost._id } }, { new: true })
-            .then(updatedUser => {
-                // Rest of your code...
-            })
-            .catch(err => {
-                console.error('Error updating user with new post:', err);
-                res.status(500).json({ message: 'Error updating user with new post', error: err });
-            });
-    })
-        .catch(err => {
-            console.error('Error creating a post:', err);
-            res.status(500).json({ message: 'Something went wrong creating a post.', error: err });
+        // Create a new Post record
+        const newPost = await Post.create({
+            author: user,
+            title: req.body.title,
+            description: req.body.description,
+            postImages: req.body.postImages,
         });
+
+        // Update the user's 'posts' field with the new post's ID
+        await User.findByIdAndUpdate(userId, { $push: { posts: newPost._id } }, { new: true });
+
+        res.json(newPost);
+    } catch (err) {
+        console.error('Error creating a post:', err);
+        res.status(500).json({ message: 'Something went wrong creating a post.', error: err });
+    }
 };
+
 
 
 

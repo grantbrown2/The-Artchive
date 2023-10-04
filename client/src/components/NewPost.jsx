@@ -24,7 +24,6 @@ const NewPost = ({showNewPost, toggleNewPost, postList, setPostList, fullPostLis
         formData.append("title", title);
         formData.append("description", description);
         formData.append("postImages", postImages);
-
         axios.post("http://localhost:8000/api/posts",
             formData, 
             {
@@ -33,10 +32,15 @@ const NewPost = ({showNewPost, toggleNewPost, postList, setPostList, fullPostLis
             }
         )
             .then(res => {
-                console.log(res);
-                setPostList([...postList, res.data]);
-                setFullPostList([...fullPostList, res.data]);
-                toggleNewPost();
+                if (res.status === 200) {
+                    console.log(res.data);
+                    const newPost = res.data
+                    setPostList([...postList, newPost]);
+                    setFullPostList([newPost, ...fullPostList]);
+                    toggleNewPost();
+                } else {
+                    console.log("error occurred in the .then statement")
+                }
             })
             .catch(err => {
                 console.log(err);
