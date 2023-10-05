@@ -3,7 +3,14 @@ import { useState } from 'react';
 import axios from 'axios';
 import '../styles/Post.css'
 
-const NewPost = ({showNewPost, toggleNewPost, postList, setPostList, fullPostList, setFullPostList}) => {
+const NewPost = ({showNewPost,
+    toggleNewPost,
+    postList,
+    setPostList,
+    fullPostList,
+    setFullPostList,
+    toggleMenu}) => {
+
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [postImages, setPostImages] = useState([]);
@@ -38,6 +45,7 @@ const NewPost = ({showNewPost, toggleNewPost, postList, setPostList, fullPostLis
                     setPostList([...postList, newPost]);
                     setFullPostList([newPost, ...fullPostList]);
                     toggleNewPost();
+                    toggleMenu();
                 } else {
                     console.log("error occurred in the .then statement")
                 }

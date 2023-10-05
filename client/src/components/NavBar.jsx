@@ -22,7 +22,8 @@ const NavBar = ({ componentOpen, toggleMenu, toggleNewPost, showNewPost, toggleP
             postList={postList}
             setPostList={setPostList}
             fullPostList={fullPostList}
-            setFullPostList={setFullPostList}/>}
+            setFullPostList={setFullPostList}
+            toggleMenu={toggleMenu}/>}
         </div>
     )
 }

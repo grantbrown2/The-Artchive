@@ -7,7 +7,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faSquarePlus, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 
-const HamburgerMenu = ({componentOpen, toggleNewPost, showNewPost, toggleProfileComponent, postList, setPostList, fullPostList, setFullPostList}) => {
+const HamburgerMenu = ({componentOpen,
+    toggleNewPost,
+    showNewPost,
+    toggleProfileComponent,
+    postList, setPostList,
+    fullPostList,
+    setFullPostList,
+    toggleMenu}) => {
 
     const navigate = useNavigate();
     function logoutUser(e) {
@@ -44,7 +51,8 @@ const HamburgerMenu = ({componentOpen, toggleNewPost, showNewPost, toggleProfile
             postList={postList}
             setPostList={setPostList}
             fullPostList={fullPostList}
-            setFullPostList={setFullPostList}/>}
+            setFullPostList={setFullPostList}
+            toggleMenu={toggleMenu}/>}
         </div>
     )
 }

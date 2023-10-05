@@ -3,7 +3,6 @@ const PostController = require('../controllers/post.controller');
 const { authenticate, getIdFromCookie } = require('../config/jwt.config');
 const express = require('express');
 const { get } = require('mongoose');
-const path = require('path'); // Import the 'path' module
 
 const multer = require('multer');
 

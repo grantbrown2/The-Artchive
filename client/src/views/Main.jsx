@@ -11,16 +11,21 @@ const Main = () => {
     const [componentOpen, setComponentOpen] = useState(false);
     const [showNewPost, setShowNewPost] = useState(false);
     const [profileToggle, setProfileToggle] = useState(false);
+
+    const [activePostId, setActivePostId] = useState(null);
+    const [postIDD, setPostIDD] = useState('');
+
     const [postList, setPostList] = useState([]);
     const [fullPostList, setFullPostList] = useState([]);
+
     const [loggedInUsername, setLoggedInUsername] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/users/self', {withCredentials:true})
-        .then((response) =>{
-            setLoggedInUsername(response.data.user.username)
-        })
-        }, [])
+        axios.get('http://localhost:8000/api/users/self', { withCredentials: true })
+            .then((response) => {
+                setLoggedInUsername(response.data.user.username)
+            })
+    }, [])
 
     const toggleMenu = () => {
         setComponentOpen(!componentOpen);
@@ -36,6 +41,11 @@ const Main = () => {
     const toggleProfileComponent = () => {
         setProfileToggle(!profileToggle);
         setComponentOpen(false);
+    };
+
+    const togglePostSettings = (postId) => {
+        setActivePostId(postId === activePostId ? null : postId);
+        setPostIDD(postId);
     };
 
     return (
@@ -64,6 +74,9 @@ const Main = () => {
                 fullPostList={fullPostList}
                 setFullPostList={setFullPostList}
                 loggedInUsername={loggedInUsername}
+                togglePostSettings={togglePostSettings}
+                activePostId={activePostId}
+                postIDD={postIDD}
             />
         </div>
     )
