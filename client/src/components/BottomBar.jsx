@@ -9,7 +9,7 @@ import { faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 
 
 
-const BottomBar = ({setProfileToggle, setComponentOpen, setShowNewPost}) => {
+const BottomBar = ({setProfileToggle, setComponentOpen, setShowNewPost, setAboutToggle}) => {
 
     const navigate = useNavigate();
 
@@ -27,7 +27,14 @@ const BottomBar = ({setProfileToggle, setComponentOpen, setShowNewPost}) => {
         setProfileToggle(false);
         setComponentOpen(false);
         setShowNewPost(false);
+        setAboutToggle(false);
     };
+
+    const openAboutComponent = () => {
+        setAboutToggle(true);
+        setComponentOpen(false);
+        setShowNewPost(false);
+    }
 
     return (
         <footer className="footer">
@@ -41,9 +48,9 @@ const BottomBar = ({setProfileToggle, setComponentOpen, setShowNewPost}) => {
                 <Link className="menu__link" onClick={returnHome}>
                     Home
                 </Link>
-                <a className="menu__link" href="/">
+                <Link className="menu__link" onClick={openAboutComponent}>
                     About
-                </a>
+                </Link>
                 <Link  className="menu__link" onClick={logoutUser}>
                     Logout
                 </Link>

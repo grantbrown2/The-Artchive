@@ -5,10 +5,12 @@ import WithAuth from '../components/WithAuth'
 import AllPosts from '../components/AllPosts'
 import './Main.css'
 import axios from 'axios'
+import About from '../components/About'
 
 
 const Main = () => {
     const [componentOpen, setComponentOpen] = useState(false);
+    const [aboutToggle, setAboutToggle] = useState(false);
     const [showNewPost, setShowNewPost] = useState(false);
     const [profileToggle, setProfileToggle] = useState(false);
 
@@ -31,6 +33,9 @@ const Main = () => {
         setComponentOpen(!componentOpen);
         if (showNewPost === true) {
             setShowNewPost(!showNewPost);
+        }
+        if (aboutToggle === true) {
+            setAboutToggle(false);
         }
     };
 
@@ -65,7 +70,11 @@ const Main = () => {
                 setProfileToggle={setProfileToggle}
                 setComponentOpen={setComponentOpen}
                 setShowNewPost={setShowNewPost}
+                setAboutToggle={setAboutToggle}
             />
+            {aboutToggle ? (
+                <About />
+            ): null}
             <AllPosts
                 showNewPost={showNewPost}
                 profileToggle={profileToggle}
@@ -77,6 +86,7 @@ const Main = () => {
                 togglePostSettings={togglePostSettings}
                 activePostId={activePostId}
                 postIDD={postIDD}
+                aboutToggle={aboutToggle}
             />
         </div>
     )

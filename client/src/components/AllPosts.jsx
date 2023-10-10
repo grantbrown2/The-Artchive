@@ -20,7 +20,8 @@ const AllPosts = ({showNewPost,
     loggedInUsername,
     togglePostSettings,
     activePostId,
-    postIDD}) => {
+    postIDD,
+    aboutToggle}) => {
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/posts', { withCredentials: true })
@@ -36,6 +37,7 @@ const AllPosts = ({showNewPost,
     return (
         <div className='all-posts'>
             {showNewPost ? <div className="blur"></div> : null }
+            {aboutToggle ? <div className="blur"></div> : null }
             <Profile profileToggle={profileToggle} postList={postList} setPostList={setPostList} fullPostList={fullPostList} setFullPostList={setFullPostList}/>
             {!profileToggle && fullPostList.map((post) => (
                 <div className='post-content' key={post._id}>

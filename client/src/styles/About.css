@@ -1,0 +1,36 @@
+.about-panel {
+    width: 750px;
+    height: 1000px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.about-panel-header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+.about-panel-header h2 {
+    margin: 0;
+}
+.about-panel-content {
+    padding: 20px;
+}
+.about-product-backlog p {
+    color: black;
+    justify-content: flex-start;
+    margin: 5px 25px;
+}
+.product-backlog {
+    font-size: 30px;
+    text-align: center;
+}
+.strike {
+    text-decoration: line-through;
+}
