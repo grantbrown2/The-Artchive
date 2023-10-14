@@ -65,8 +65,28 @@ module.exports.createPost = async (req, res) => {
     }
 };
 
+// With liked posts on the frontend, do we want to make a request when initially
+// loading all posts to see if the user has already liked any of those posts?
+module.exports.likePost = async (req, res) => {
+    const token = req.cookies.usertoken;
+    const decodedToken = jwt.verify(token, secret);
+    const userId = decodedToken.id;
+    const user = await User.findById(userId);
 
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
 
+    Post.updateOne({
+        "_id": req.params.id,
+        "likes": { "$ne": userId }
+    }, {
+        "$inc": { "likeCount": 1 },
+        "$push": { "likes": userId }
+    })
+        .then(updatedPost => res.json(updatedPost))
+        .catch(err => res.json({ message: "Something went wrong liking that post.", error: err }))
+}
 
 module.exports.updatePost = (req, res) => {
     Post.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
