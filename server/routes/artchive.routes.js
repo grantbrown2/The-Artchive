@@ -35,4 +35,5 @@ module.exports = (app) => {
     app.get('/api/posts/:id', authenticate, getIdFromCookie, PostController.findPostById);
     app.patch('/api/posts/:id', authenticate, getIdFromCookie, PostController.updatePost);
     app.delete('/api/posts/:id', authenticate, getIdFromCookie, PostController.deletePost);
+    app.patch('/api/likepost/:id', authenticate, getIdFromCookie, PostController.likePost);
 }
